@@ -1,0 +1,17 @@
+name: WintermarkCrates
+version: '${version}'
+main: io.github.wintermarkinteractive.crates.CratesPlugin
+description: Crates with keys, an animated opening menu, reward chances, previews and holograms.
+author: Wintermark Interactive
+website: https://github.com/wintermarkinteractive
+api-version: '26.3'
+permissions:
+  wintermark.crates.use:
+    description: Open crates with a key.
+    default: true
+  wintermark.crates.preview:
+    description: Preview crate rewards (left-click or /crate preview).
+    default: true
+  wintermark.crates.admin:
+    description: Place and remove crates, give keys, reload.
+    default: op

@@ -1,0 +1,137 @@
+# ============================================================
+#  Wintermark Crates - config.yml
+#  Text uses MiniMessage colors: <gold>, <green>, <bold>, <#C9A227> ...
+#  Placeholders: <player>, <crate> (crate name), <reward> (reward name), <amount>
+#  After editing: /crate reload
+# ============================================================
+
+animation:
+  # false = rewards are given instantly, without the rolling menu.
+  enabled: true
+
+# Push players back a little when they right-click a crate without the right key.
+pushback: true
+# Sneak + right-click opens all keys in your hand at once (max this many). Per crate: mass-open: false
+mass-open-limit: 64
+
+holograms:
+  enabled: true
+  # Height of the text above the crate block.
+  height: 1.4
+
+particles:
+  # Particles circling around every crate when a player is within 24 blocks.
+  enabled: true
+  # A particle without extra data, e.g. END_ROD, FLAME, HAPPY_VILLAGER, ENCHANT, WAX_ON, SOUL_FIRE_FLAME
+  type: END_ROD
+
+sounds:
+  # Minecraft sound keys. Leave empty for no sound.
+  tick: "block.note_block.hat"
+  win: "entity.player.levelup"
+  no-key: "entity.villager.no"
+
+# ------------------------------------------------------------
+# Crates. Every crate has a key item and rewards.
+#   chance:  relative weight. The preview shows it as a percentage of all rewards in the crate.
+#   display: item shown in the menus ("MATERIAL:amount"). Default = the first item.
+#   display-name / display-lore: optional custom name and lore for the menu item.
+#   items:    items the player gets ("MATERIAL:amount").
+#   commands: run by the console. <player> and <crate> are replaced.
+#             Example with an economy plugin: "eco give <player> 500"
+#   message:  sent to the player. <reward> = the display name.
+#   broadcast: true = tell the whole server (for rare rewards).
+# ------------------------------------------------------------
+crates:
+  vote:
+    name: "<gold><bold>Vote Crate</bold></gold>"
+    hologram:
+      - "<gold><bold>Vote Crate</bold></gold>"
+      - "<gray>Right-click with a <gold>Vote Key</gold>"
+      - "<dark_gray>Left-click to preview"
+    key:
+      material: TRIPWIRE_HOOK
+      name: "<gold>Vote Key"
+      lore:
+        - "<gray>Right-click the <gold>Vote Crate</gold> to open."
+        - "<dark_gray>Sneak + right-click to open all."
+      glow: true
+    rewards:
+      iron:
+        chance: 35
+        items: ["IRON_INGOT:16"]
+        message: "<gray>You won <white><reward></white>."
+      bread:
+        chance: 25
+        items: ["BREAD:16"]
+        message: "<gray>You won <white><reward></white>."
+      xp:
+        chance: 20
+        display: "EXPERIENCE_BOTTLE:1"
+        display-name: "<green>5 XP levels"
+        commands: ["xp add <player> 5 levels"]
+        message: "<gray>You won <green>5 XP levels</green>."
+      gold:
+        chance: 12
+        items: ["GOLD_INGOT:8"]
+        message: "<gray>You won <gold><reward></gold>."
+      diamonds:
+        chance: 7
+        items: ["DIAMOND:3"]
+        message: "<aqua>You won <reward>!"
+      legendary-key:
+        chance: 1
+        display: "TRIPWIRE_HOOK:1"
+        display-name: "<light_purple><bold>Legendary Key"
+        commands: ["crate givekey <player> legendary 1"]
+        message: "<light_purple><bold>JACKPOT!</bold> You won a Legendary Key!"
+        broadcast: true
+
+  legendary:
+    name: "<light_purple><bold>Legendary Crate</bold></light_purple>"
+    hologram:
+      - "<light_purple><bold>Legendary Crate</bold></light_purple>"
+      - "<gray>Right-click with a <light_purple>Legendary Key</light_purple>"
+      - "<dark_gray>Left-click to preview"
+    key:
+      material: TRIPWIRE_HOOK
+      name: "<light_purple>Legendary Key"
+      lore:
+        - "<gray>Right-click the <light_purple>Legendary Crate</light_purple> to open."
+      glow: true
+    rewards:
+      diamonds:
+        chance: 40
+        items: ["DIAMOND:8"]
+        message: "<aqua>You won <reward>!"
+      emeralds:
+        chance: 30
+        items: ["EMERALD:16"]
+        message: "<green>You won <reward>!"
+      golden-apples:
+        chance: 20
+        items: ["GOLDEN_APPLE:4"]
+        message: "<gold>You won <reward>!"
+      netherite:
+        chance: 8
+        items: ["NETHERITE_INGOT:1"]
+        message: "<dark_purple><bold>Rare!</bold> You won <reward>!"
+        broadcast: true
+      elytra:
+        chance: 2
+        items: ["ELYTRA:1"]
+        message: "<light_purple><bold>JACKPOT!</bold> You won an Elytra!"
+        broadcast: true
+
+messages:
+  prefix: "<dark_gray>[<gold>Crates</gold>]</dark_gray> "
+  need-key: "<red>You need a key for the <reset><crate><red> to open it. <gray>Left-click to preview."
+  mass-opened: "<green>Opened <white><amount></white> keys for the <reset><crate><green>."
+  key-received: "<green>You received <white><amount></white> key(s) for the <reset><crate><green>."
+  broadcast: "<white><player></white> <gray>won</gray> <reward> <gray>from the</gray> <crate><gray>!"
+  unknown-crate: "<red>There is no crate called <white><crate></white>. Crates: <white><crates></white>"
+  no-permission: "<red>You don't have permission to do that."
+  players-only: "<red>Only players can use this."
+  preview-title: "<crate> <dark_gray>- Rewards"
+  opening-title: "<crate>"
+  preview-chance: "<gray>Chance: <yellow><chance>%</yellow>"
